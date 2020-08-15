@@ -2,6 +2,7 @@ import edu.duke.*;
 import java.io.File;
 
 public class PerimeterAssignmentRunner {
+    
     public double getPerimeter (Shape s) {
         // Start with totalPerim = 0
         double totalPerim = 0.0;
@@ -41,7 +42,6 @@ public class PerimeterAssignmentRunner {
         avgLen = getperim/points; 
         //return avgLen is the answer. 
         return avgLen; 
-       
     }
 
     public double getLargestSide(Shape s) {
@@ -87,11 +87,10 @@ public class PerimeterAssignmentRunner {
             Shape s = new Shape(fr);
             //Get current perimeter of current file.
             double currPerim = getPerimeter(s); 
-            //Conditional to determine which of the perimeter is the biggest. 
+            //Conditional to determine which of the perimeter is the biggest.
             if(currPerim > larPerim){
                 larPerim = currPerim; 
             }
- 
         }
         return larPerim;
     }
@@ -101,18 +100,20 @@ public class PerimeterAssignmentRunner {
         //This method should, like the getLargestPerimeterMultipleFiles method,
         //create its own Directory Resource, except that this new method returns
         //the File that has the largest such perimeter,so it has return type File.
-        double largestPerim = 0.0; 
-        File temp = null;
         DirectoryResource dr = new DirectoryResource();
-             //replace this code
+        File temp = null ;
+        double largerPerim = 0.0;
         for(File f : dr.selectedFiles()){
-            FileResource fr = new FileResource(f);
-            Shape s = new Shape(fr);
-            double currPerim = getPerimeter(s);
-            if(currPerim > largestPerim){
-                temp = f;
-            }
+           FileResource fr = new FileResource(f); 
+           Shape s = new Shape(fr); 
+           double currPerim = getPerimeter(s); 
+           
+           if(currPerim > largerPerim){
+               currPerim = largerPerim; 
+               temp = f;
+            } 
         }
+        
         return temp.getName();
     }
 
@@ -120,22 +121,24 @@ public class PerimeterAssignmentRunner {
         FileResource fr = new FileResource();
         Shape s = new Shape(fr);
         double length = getPerimeter(s);
-        System.out.println("perimeter = " + length);
+        //System.out.println("perimeter = " + length);
         
         int points = getNumPoints(s);
-        System.out.println("There are " + points + " points"); 
+        //System.out.println("There are " + points + " points"); 
         
         
-        double averageLength = getAverageLength(s);
+       // double averageLength = getAverageLength(s);
         
-        System.out.println("The average length is " + averageLength); 
+       // System.out.println("The average length is " + averageLength); 
         
         double largest = getLargestSide(s);
-        System.out.println("This is the largest side " + largest); 
+        //System.out.println("This is the largest side " + largest); 
         
         double bigX = getLargestX(s);
-        System.out.println("This is the largest X in the points " + bigX); 
+        //System.out.println("This is the largest X in the points " + bigX); 
         
+        testPerimeterMultipleFiles();
+        testFileWithLargestPerimeter(); 
         
     }
     
@@ -147,8 +150,7 @@ public class PerimeterAssignmentRunner {
         //You will select the files when you run this method 
         //(hint: see our documentation for the DirectoryResource class).
         double largestMultiFilePerim = getLargestPerimeterMultipleFiles();
-        System.out.println("Current largest perim " + largestMultiFilePerim); 
-          
+        System.out.println(largestMultiFilePerim); 
     }
 
     
@@ -156,9 +158,9 @@ public class PerimeterAssignmentRunner {
         //Add code to the method testFileWithLargestPerimeter 
         //to call getFileWithLargestPerimeter. 
         //For the File that is returned, print the name of that file.
-        String largest = getFileWithLargestPerimeter(); 
+        String fileName = getFileWithLargestPerimeter();
+        System.out.print(fileName); 
         
-        System.out.println("This is largest" + largest); 
         
     }
 
